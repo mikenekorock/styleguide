@@ -4,57 +4,48 @@
   * [目的](#section-0-1)
   * [使い方](#section-0-2)
   * [原則](#section-0-3)
-* [ファイル](#section-1)
+* [命名規約](#section-1)
   * [概要](#section-1-0)
-  * [ファイルレイアウト](#section-1-1)
-  * [部分テンプレート](#section-1-2)
-* [命名規約](#section-2)
-  * [概要](#section-2-0)
-  * [クラス・モジュール名](#section-2-1)
-* [命名規則](#section-3)
-  * [メソッド名](#section-3-0)
-      * [自己破壊メソッド](#section-3-0-0)
-      * [クラスメソッド](#section-3-0-1)
-  * [定数名](#section-3-1)
-  * [変数名](#section-3-2)
-  * [orm_forのローカル変数名](#section-3-3)
-  * [シンボル](#section-3-4)
-* [ガイドライン](#section-4)
-  * [インデント](#section-4-0)
-  * [コメント](#section-4-1)
-  * [代入](#section-4-2)
-  * [文字列](#section-4-3)
-  * [メソッド定義](#section-4-4)
-      * [引数](#section-4-4-0)
-  * [可変パラメータ](#section-4-5)
-  * [ブロック](#section-4-6)
-  * [条件分岐](#section-4-7)
-  * [繰り返し](#section-4-8)
-  * [例外](#section-4-9)
-  * [メソッドレベルでのensure](#section-4-10)
-  * [ファイル](#section-4-11)
-  * [RubyGems](#section-4-12)
-  * [メタプログラミング-概要](#section-4-13)
-  * [メタプログラミング-method_missing](#section-4-14)
-  * [return](#section-4-15)
-  * [self](#section-4-16)
-  * [Symbol.to_procの活用（Ruby1.9）](#section-4-17)
-  * [lambdaとprocの活用 (使い分け)](#section-4-18)
-  * [例外のrescueの使い方](#section-4-19)
-* [推奨イデオム](#section-5)
-  * [options={}パラメータのデフォルト値セット方法](#section-5-0)
-  * [FIleのパスを作る記述方法](#section-5-1)
-  * [OSネイティブ](#section-5-2)
-  * [インスタンス変数の名前](#section-5-3)
-* [データベース設計](#section-6)
-  * [データベース名](#section-6-0)
-  * [日付型カラム名](#section-6-1)
-  * [タイプコードカラム名](#section-6-2)
-  * [booleanカラム名](#section-6-3)
-* [テスト](#section-7)
-  * [概要](#section-7-0)
-* [参考文献](#section-8)
-  * [一覧](#section-8-0)
+  * [クラス・モジュール名](#section-1-1)
+* [命名規則](#section-2)
+  * [メソッド名](#section-2-0)
+      * [自己破壊メソッド](#section-2-0-0)
+      * [クラスメソッド](#section-2-0-1)
+  * [定数名](#section-2-1)
+  * [変数名](#section-2-2)
+  * [orm_forのローカル変数名](#section-2-3)
+  * [シンボル](#section-2-4)
+* [ガイドライン](#section-3)
+  * [インデント](#section-3-0)
+  * [コメント](#section-3-1)
+  * [代入](#section-3-2)
+  * [文字列](#section-3-3)
+  * [メソッド定義](#section-3-4)
+      * [引数](#section-3-4-0)
+  * [可変パラメータ](#section-3-5)
+  * [ブロック](#section-3-6)
+  * [条件分岐](#section-3-7)
+  * [繰り返し](#section-3-8)
+  * [例外](#section-3-9)
+  * [メソッドレベルでのensure](#section-3-10)
+  * [ファイル](#section-3-11)
+  * [RubyGems](#section-3-12)
+  * [メタプログラミング-概要](#section-3-13)
+  * [メタプログラミング-method_missing](#section-3-14)
+  * [return](#section-3-15)
+  * [self](#section-3-16)
+  * [Symbol.to_procの活用（Ruby1.9）](#section-3-17)
+  * [lambdaとprocの活用 (使い分け)](#section-3-18)
+  * [例外のrescueの使い方](#section-3-19)
+* [推奨イデオム](#section-4)
+  * [options={}パラメータのデフォルト値セット方法](#section-4-0)
+  * [FIleのパスを作る記述方法](#section-4-1)
+  * [OSネイティブ](#section-4-2)
+  * [インスタンス変数の名前](#section-4-3)
+* [テスト](#section-5)
+  * [概要](#section-5-0)
+* [参考文献](#section-6)
+  * [一覧](#section-6-0)
 
 ##### section-0
 ## 基本方針
@@ -78,31 +69,15 @@
 - 見て読みやすく
 - 読んで解りやすく
 - スコープは適切に
-- DRY(Don't Your Self)
+- DRY(Don't Repeat Your Self)
 - OCP(Open-Closed Principle)
 - 一般的に多く使われているrubyistにまねる
 - 変化を受け入れろ！
 
 
 ##### section-1
-## ファイル
-##### section-1-0
-### 概要
-- 以下は Rails プロジェクトにおいてのルールである。基本的には Rails のルールにしたがうようにしましょう。
-
-##### section-1-1
-### ファイルレイアウト
-- RAILS_ROOT/app/views/layouts はレイアウトファイルのみを入れましょう。
-- 全体を通して使用するレイアウトファイルは application.html.erb という名前で作成しましょう。
-
-##### section-1-2
-### 部分テンプレート
-- コントローラにまたがる部分テンプレートは RAILS_ROOT/app/views/share に配置するようにしましょう。
-
-
-##### section-2
 ## 命名規約
-##### section-2-0
+##### section-1-0
 ### 概要
 - 名前は単なるラベルではなく、読み手に意味を伝えるべきものである。よって名前は意味のあるものであるべきです。命名する対象の変数のスコープの広さにに比例してわかりやすさ重視にしましょう。
 
@@ -131,7 +106,7 @@ end
 
 名前が長い場合に、入力の手間が増えるという問題があるが、それはIDEやエディタで対応できることなのでここでは問題にせずにいきましょう！
 
-##### section-2-1
+##### section-1-1
 ### クラス・モジュール名
 - クラス、モジュール名は、各単語の一文字めを大文字にし、'_'などの区切り文字は使用しません。
 - TPPなどの略語の場合は全て大文字のままにしましょう（省略してるよーって意味が伝わるように）。
@@ -146,16 +121,16 @@ AKBMember
 OreOreError
 
 #誤り
-Nurse_Room
+Nurse_Call
 TPP_CLIENT
 AKBMembers
 CsvReader
 ```
 
 
-##### section-3
+##### section-2
 ## 命名規則
-##### section-3-0
+##### section-2-0
 ### メソッド名
 - メソッド名は、全て小文字とし単語の区切りに_をつかいましょう。
 - 真偽値を返すメソッド名は、動詞または形容詞に?を付けましょう。
@@ -176,7 +151,7 @@ Add_Boy
 is_noripi
 was_noripi?
 ```
-##### section-3-0-0
+##### section-2-0-0
 #### 自己破壊メソッド
 
 - 例外発生や、自己の状態を書き換える場合は、積極的にエクスクラメーションを使いましょう。
@@ -192,7 +167,7 @@ end
 
 
 
-##### section-3-0-1
+##### section-2-0-1
 #### クラスメソッド
 
 - 動的にクラスメソッドを追加する等ではなく、あらかじめメソッド名がわかっている（ようは通常のクラスメソッド定義）の場合は、素直に、self.hogeを使いましょう
@@ -219,7 +194,7 @@ end
 
 
 
-##### section-3-1
+##### section-2-1
 ### 定数名
 - クラス、モジュール名以外の定数名はすべて大文字とし、単語の区切りに'_'を用いるようにしましょう。
 
@@ -228,7 +203,7 @@ end
 HONKY_TONKY_CRAZY_I_LOVE_YOU
 ```
 
-##### section-3-2
+##### section-2-2
 ### 変数名
 - 変数名は全て小文字とし、単語の区切りに'_'を用いるようにしましょう。
 - スコープが狭いループ変数には、i,j,k という名前、スコープが狭い変数名は、クラス名を省略したものを使用してもオッケー！！！
@@ -243,8 +218,8 @@ local_variable
 $global_variable
 ```
 
-##### section-3-3
-### orm_forのローカル変数名
+##### section-2-3
+### form_forのローカル変数名
 
 - 公式だと _fieldsでAPIリファレンスがかかれている為、profile_fieldsにする。
 - form_forの小要素の場合は_fileds, _formなどにする
@@ -257,14 +232,24 @@ profile_fields
 ```
 
 
-##### section-3-4
+##### section-2-4
 ### シンボル
+- ハッシュに使用するキー名等は基本的にシンボルにしましょう。
+- シンボルは可読性を高め、イミュータブルであるためメモリを節約し実行速度が早くなるなどのメリットがあります。
+
+```ruby
+#いい例
+excellent = { key: "val" }
+good = { :key => "val" }
+
+#悪い例
+bad = { "key" => "val" }
+```
 
 
-
-##### section-4
+##### section-3
 ## ガイドライン
-##### section-4-0
+##### section-3-0
 ### インデント
 - インデントは半角スペース２コ。ハードタブの使用は禁止です。あとで本当にきっついです。できる限りエディタでセットしておきましょう。
 
@@ -276,13 +261,13 @@ ____end
 __end
 ```
 
-##### section-4-1
+##### section-3-1
 ### コメント
 - 書き手は意図が伝わるようなコードを書くようにこころがけましょう。
 - コーディング標準や規約に反する場合や、またプログラマー個人の意図がソースに介入している場所に限り、わかりやすいコメントを残すようにしましょう。
 - プログラマーの腕のみせどころは、丁寧なコメントを多く書くことではなく、いかにわかりやすいコードを書くかです。よって、コメントを残す場合には「なにを」ではなく「なぜ」を書くようにしましょう。
 
-##### section-4-2
+##### section-3-2
 ### 代入
 - 代入に規制はないが、読みやすさを重視して書きましょう。
 
@@ -297,7 +282,7 @@ a = 1 if a.nil? #×冗長なので×
 ```
 
 
-##### section-4-3
+##### section-3-3
 ### 文字列
 
 -
@@ -315,7 +300,7 @@ i + "さん、" + b + ”さん、" + a + "さん"
 
 
 
-##### section-4-4
+##### section-3-4
 ### メソッド定義
 - メソッドの定義の仮引数リストには括弧を付けるようにしましょう。
 - 引数がない場合は、括弧をつけないようにしましょう。
@@ -335,13 +320,22 @@ def foo()
   ・・・
 end
 ```
-##### section-4-4-0
+##### section-3-4-0
 #### 引数
 
+- ruby2.1ではキーワード引数をデフォルト値無しで渡せる。2.1以前のバージョンでデフォルト値なしのキーワード引数を定義するとエラーになるのでうっかりやってしまわないようにしましょう。
 - ruby2.0ではキーワード引数を使いましょう。
 - html_optionsを渡したい場合等、全てがキーワード引数でカバーできるわけではないので、場合によっては使い分けをすること。
 
 ```ruby
+#2.1
+def hoge( msg, limit: , offset: ) 
+  p msg
+  p limit
+  p offset
+end
+
+
 #2.0
 def hoge( msg, limit: 10, offset: 10) 
   p msg
@@ -360,11 +354,35 @@ end
 
 
 
-##### section-4-5
+##### section-3-5
 ### 可変パラメータ
+- 引数の数が呼び出し毎に変わるときなどには、”最後の引数”の前に「*」を付けることによって、引数を(配列として)一度に渡すことができます。
+- また、 メソッドから別のメソッドで可変パラメータを呼ぶ場合は＊を付けないと配列が多重化してしまうので必ず引数に＊を付けましょう。
+
+```ruby
+def hoge(*aaa)
+  p aaa
+end
+
+#悪い例
+def wrong(*aaa)
+  hoge(aaa)
+end
+
+#良い例
+def ok(*aaa)
+  hoge(*aaa)
+end
+wrong(1,2,3)
+#→[[1,2,3]]
+
+ok(1,2,3)
+#→[1,2,3]
+
+```
 
 
-##### section-4-6
+##### section-3-6
 ### ブロック
 - ブロックは基本的にdo・・・endを使用しましょう。ただし１行の時は{}を使いましょう。
 - またメソッドチェーンの場合も{}を使用しましょう。
@@ -391,7 +409,7 @@ end.each do |i|
 end
 ```
 
-##### section-4-7
+##### section-3-7
 ### 条件分岐
 - if式のthenは省略しましょう。
 - if !xのような場合は、unlessを使用しましょう。
@@ -452,7 +470,7 @@ when 120 then
 end
 ```
 
-##### section-4-8
+##### section-3-8
 ### 繰り返し
 while の do は省略しましょう。
 while !x のような場合は、util x に置き換えましょう。 
@@ -487,17 +505,59 @@ while true
 end
 ```
 
-##### section-4-9
+##### section-3-9
 ### 例外
 - 例外発生の基本方針はそれが「異常事態」かどうかで判断するようにしましょう。
 - 明示的に例外を発生させないとプログラムが異常終了してしまう場合に使用しましょう。
 - 例えば、ActiveRecord での save!メソッドは使わず、save メソッドを使用しましょう（バリデーションに引っかかるのは例外ではなく、想定された動作なので）。
 
-##### section-4-10
+##### section-3-10
 ### メソッドレベルでのensure
+- 例外処理で後処理が必要な場合、ensureを入れることで例外発生時の処理のし忘れによるエラーを防ぐことができる。
+- ensureは例外が発生する・しないにかかわらず必ず実行される。
+
+```ruby
+#悪い例（例外が発生しようがしまいが、ファイルが閉じられていないまま処理を抜けてしまっている。）
+def hoge
+  begin
+    file = File.open('sample.txt')
+    do_process file  #例外が発生する可能性のある処理
+  rescue
+    puts "何かが起きました。"
+  else
+    puts "無事にファイルが開けました。"
+  end
+end
+
+#いい例（ensureによって、例外の発生に関係なく、きちんとファイルが閉じられている。）
+def hoge
+  begin
+    file = File.open('sample.txt')
+    do_process file  #例外が発生する可能性のある処理
+  rescue
+    puts "何かが起きました。"
+  else
+    puts "無事にファイルが開けました。"
+  ensure
+    file.close if file #ここでファイルを閉じる処理を実装できる
+  end
+end
 
 
-##### section-4-11
+# また、例外処理がメソッド定義全体にかかる場合はbeginとendを省略できる
+def moge
+  # メソッドの本体
+rescue
+  # 例外が発生したときに実行される式
+else
+  # 例外が発生しなかったときに実行される式
+ensure
+  # 式が終了する前に必ず実行される式
+end
+
+```
+
+##### section-3-11
 ### ファイル
 - ファイルの入出力は特別な事情がない限り、ファイルクローズなどの処理の記述忘れをしないためにも、ブロックを使いましょう。
 
@@ -516,17 +576,17 @@ ensure
 end
 ```
 
-##### section-4-12
+##### section-3-12
 ### RubyGems
 - Rails アプリで使用する gems は RAILS_ROOT/Gemfileに記述すること。
 - 特に指示がない限りバージョンは明記しておくこと。
 - gem 'rails', '3.2.12'
 
-##### section-4-13
+##### section-3-13
 ### メタプログラミング-概要
 - メタプログラミングをおこなう上では、運用/保守に入った際に他人が読んでもわかりやすいことを心がけるようにしましょう。
 
-##### section-4-14
+##### section-3-14
 ### メタプログラミング-method_missing
 - superを使い、親のメソッドミッシングを呼び出すようにしましょう。 
 
@@ -551,7 +611,7 @@ end
 
 また、method_missingで追加したメソッドについては、下記の様にどのレベルまでrespond_to?に対応するかは都度チームで決定し拡張しましょう。 ruby def respond_to?(name) @attributes.key?(method) || super end
 
-##### section-4-15
+##### section-3-15
 ### return
 
 - 必要のあるreturnは書く。（redirect_toとか）
@@ -573,36 +633,13 @@ class Gay
      return "I was gay"
   end
 end
-
-#Railsのcontrollerの場合...
-
-#推奨)
-class HogesController < ApplicationController
-  def index
-     redirect_to piyos_path and return
-  end
-end
-
-class HogesController < ApplicationController
-  def index
-     redirect_to piyos_path
-     return
-  end
-end
-
-#非推奨)
-class HogesController < ApplicationController
-  def index
-     redirect_to piyos_path
-  end
-end
 ```
 
 redirect_to の後の return は基本的に書かなくても大丈夫だが、2重に return される時があるので、書いたほうが良い。
 
 
 
-##### section-4-16
+##### section-3-16
 ### self
 
 - インスタンス変数には@をつける。
@@ -643,7 +680,7 @@ end
 
 
 
-##### section-4-17
+##### section-3-17
 ### Symbol.to_procの活用（Ruby1.9）
 
 - to_proc相当の機能は、Ruby 1.9 ではSymbolクラスへと統合されました。
@@ -670,7 +707,7 @@ sum = points.inject(0, &:+)
 
 
 
-##### section-4-18
+##### section-3-18
 ### lambdaとprocの活用 (使い分け)
 
 - procよりもlambdaを積極的に使う
@@ -720,7 +757,7 @@ f.(x,y)
 
 
 
-##### section-4-19
+##### section-3-19
 ### 例外のrescueの使い方
 
 - rescueを使う時は、何をキャッチしているのかを明確にするため、例外オブジェクトを明記する。
@@ -751,9 +788,9 @@ end
 
 
 
-##### section-5
+##### section-4
 ## 推奨イデオム
-##### section-5-0
+##### section-4-0
 ### options={}パラメータのデフォルト値セット方法
 
 - options={}パラメータのデフォルト値セット方法は以下を推奨します。
@@ -768,7 +805,7 @@ end
 
 
 
-##### section-5-1
+##### section-4-1
 ### FIleのパスを作る記述方法
 
 - Fileのパスを作る場合は以下を推奨します。
@@ -782,7 +819,7 @@ path = File.join Rails.root, "tmp", "hoge"
 ```
 
 
-##### section-5-2
+##### section-4-2
 ### OSネイティブ
 
 - OSネイティブはなるべく呼ばないようにすることを推奨
@@ -803,7 +840,7 @@ DIR_PATH="/tmp/hoge"
 ```
 
 
-##### section-5-3
+##### section-4-3
 ### インスタンス変数の名前
 
 - 代入側は呼び出したクラスのdowncaseにすることを推奨
@@ -817,54 +854,18 @@ user = User.new
 ```
 
 
-
-##### section-6
-## データベース設計
-##### section-6-0
-### データベース名
-- development, product 環境ともに project_name で統一しましょう。
-- test環境、またその他の環境に関しては project_name_environment で統一しましょう。
-
-##### section-6-1
-### 日付型カラム名
-- DATE型はカラム名を*_onとする。
-- DATETIME型はカラム名を*_atとする。
-- 作成日、更新日はcreated_at、updated_atとする。
-- マイグレーションでt.timestampは利用しないこと。
-
-```ruby
-create_table :users do |t|
-  t.timestamp :moged_at # <= これはナシ
-  t.timestamp :ahoge_on # <= これはナシ
-
-  t.datetime :published_at
-  t.date :operated_on
-
-  t.timestamps # created_at, updated_at
-end
-```
-
-##### section-6-2
-### タイプコードカラム名
-
-
-##### section-6-3
-### booleanカラム名
-
-
-
-##### section-7
+##### section-5
 ## テスト
-##### section-7-0
+##### section-5-0
 ### 概要
 - プロダクトコードに書く前に、テストコードを書きましょう。
 - テストツールにはRSpecをつかいましょう。
 - テストは自動化しましょう。
 
 
-##### section-8
+##### section-6
 ## 参考文献
-##### section-8-0
+##### section-6-0
 ### 一覧
 - プログラミング言語Ruby[ISBN978-4-87311-394-4]
 - 達人プログラマー[ISBN4-89471-274-1]
