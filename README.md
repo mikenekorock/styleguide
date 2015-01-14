@@ -529,23 +529,25 @@ end
 
 ##### section-4-10
 ### メソッドレベルでのensure
-- 例外処理で後処理が必要な場合、ensureを入れることで例外発生時の処理のし忘れによるエラーを防ぐことができる。
-- ensureは例外が発生する・しないにかかわらず必ず実行される。
+- 例外処理などでファイルオープンする場合はクローズ処理がDRYになりがちなので、そうなる場合はensureを使いましょう。
+- ensureは例外が発生する・しないにかかわらず必ず実行されます。
 
 ```ruby
-#悪い例（例外が発生しようがしまいが、ファイルが閉じられていないまま処理を抜けてしまっている。）
+#悪い例（例外が発生する時としない時の両方に処理を書いているので、DRYになっている。）
 def hoge
   begin
     file = File.open('sample.txt')
     do_process file  #例外が発生する可能性のある処理
   rescue
     puts "何かが起きました。"
+    file.close if file
   else
     puts "無事にファイルが開けました。"
+    file.close if file
   end
 end
 
-#いい例（ensureによって、例外の発生に関係なく、きちんとファイルが閉じられている。）
+#いい例（ensureによって、DRYによるコードの肥大化を防ぐ。）
 def hoge
   begin
     file = File.open('sample.txt')
